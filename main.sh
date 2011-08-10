@@ -26,9 +26,10 @@ fi
 # From Diet Swift Linux to Regular Swift Linux
 
 # Change Conky
-su -c "python $DIR_DEVELOP/regular/conky.py" $USERNAME
+python $DIR_DEVELOP/regular/conky.py
 
-# Change MIME-types
+# Change MIME-types to OpenOffice formats
+
 
 # Change ROX
 
