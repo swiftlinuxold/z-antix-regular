@@ -36,37 +36,9 @@ python $DIR_DEVELOP/regular/mime.py
 python $DIR_DEVELOP/regular/rox.py
 
 # Add OpenOffice
+sh $DIR_DEVELOP/openoffice/main.sh
 
 # Add forensic packages
-
-
-
-
-
-
-
-
-
-# Replacing files in /usr/local/bin and /usr/share/antiX/localisation/en/local-bin
-# Remove the idesk, Fluxbox, and Nitrogen configuration options 
-# (due to the removal of these packages)
-# antiX Control Center -> Swift Linux Control Center
-
-echo "REPLACING THE CONTROL CENTER"
-rm /usr/local/bin/antixcc.sh
-cp $DIR_DEVELOP/control_center/usr_local_bin/antixcc.sh /usr/local/bin
-chown root:root /usr/local/bin/antixcc.sh
-chmod a+x /usr/local/bin/antixcc.sh
-
-rm /usr/share/antiX/localisation/en/local-bin/antixcc.sh
-cp $DIR_DEVELOP/control_center/usr_local_bin/antixcc.sh /usr/share/antiX/localisation/en/local-bin
-chown root:root /usr/share/antiX/localisation/en/local-bin/antixcc.sh
-chmod a+x /usr/share/antiX/localisation/en/local-bin/antixcc.sh
-
-if [ $IS_CHROOT -eq 0 ]; then
-	chown $USERNAME:users /usr/share/antiX/localisation/en/local-bin/antixcc.sh
-else
-	chown demo:users /usr/share/antiX/localisation/en/local-bin/antixcc.sh
-fi
+sh $DIR_DEVELOP/forensic/main.sh
 
 exit 0

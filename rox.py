@@ -18,62 +18,22 @@ else:
 # Change pb_antiX-ice files to show OpenOffice icons:
 # /home/$USERNAME/.config/rox.sourceforge.net/ROX-Filer/pb_antiX-ice
 # /etc/skel/.config/rox.sourceforge.net/ROX-Filer/pb_antiX-ice
-# usr/share/antiX-install/icewm/pb_antiX-ice
+# /usr/share/antiX-install/icewm/pb_antiX-ice
 
+def change_text (pathdir):
+	file_pb=pathdir+'/pb_antiX-ice'
+	text=open(file_pb, 'r').read()
+	text_old='</pinboard>'
+	t1='<icon x="40" y="470" label="OO-Write">/usr/share/applications/ooo-writer.desktop</icon>\n'
+	t2='<icon x="110" y="470" label="OO-Calc">/usr/share/applications/ooo-calc.desktop</icon>\n'
+	t3='<icon x="180" y="470" label="OO-Impress">/usr/share/applications/ooo-impress.desktop</icon>\n'
+	t4=text_old
+	text_new=t1+t2+t3+t4
+	text=text.replace(text_old, text_new)
+	open (file_pb, 'w').write(text)
 
-
-
-
-
-
-
-
-
-# 1.  defaults.list in ~/.local/share/applications and 
-# /etc/skel/.local/share/applications: abiword -> oowriter
-
-# Changing files in ~/.config/rox.sourceforge.net/MIME-types
-# and /etc/skel/.config/rox.sourceforge.net/MIME-types
-# 2. application_msword: abiword -> oowriter
-# 3. application_vnd.ms-excel: gnumeric -> oocalc
-# 4. application_vnd.oasis.opendocument.spreadsheet: gnumeric -> oocalc
-# 5. application_vnd.oasis.opendocument.text: abiword -> oowriter
-
-# Adding files in ~/.config/rox.sourceforge.net/MIME-types
-# and /etc/skel/.config/rox.sourceforge.net/MIME-types
-# 6. application_vnd.ms-powerpoint: ooimpress
-# 7. application_vnd.oasis.opendocument.presentation: ooimpress
-
-file_mime=''
-def change_text (pathdir, filename, text_old, text_new):
-	if (~is_chroot):
-		file_mime='/home/'+username+'/'+pathdir+'/'+filename
-		text=open(file_mime, 'r').read()
-		text=text.replace(text_old, text_new)
-		open (file_mime, 'w').write(text)
-	
-	file_mime='/etc/skel/'+pathdir+'/'+filename
-	text=open(file_mime, 'r').read()
-	text = text.replace(text_old, text_new) 
-	open(file_mime, "w").write(text)
-	
-change_text ('.local/share/applications', 'defaults.list', 'abiword', 'oowriter')
-path_mime_types='.config/rox.sourceforge.net/MIME-types'
-change_text (path_mime_types, 'application_msword', 'abiword', 'oowriter')
-change_text (path_mime_types, 'application_vnd.ms-excel', 'gnumeric', 'oocalc')
-change_text (path_mime_types, 'application_vnd.oasis.opendocument.spreadsheet', 'gnumeric', 'oocalc')
-change_text (path_mime_types, 'application_vnd.oasis.opendocument.text', 'abiword', 'oowriter')
-
-def add_files(pathdir, filename, text):
-	if (~is_chroot):
-		file_mime='/home/'+username+'/'+pathdir+'/'+filename
-		f = open (file_mime, 'w')
-		f.write('#! /bin/sh\n'+text)
-	
-	file_mime='/etc/skel/'+pathdir+'/'+filename
-	f = open (file_mime, 'w')
-	f.write('#! /bin/sh\n'+text)
-	
-path_mime_types='.config/rox.sourceforge.net/MIME-types'
-add_files(path_mime_types, 'application_vnd.ms-powerpoint', 'exec ooimpress "$@"')
-add_files(path_mime_types, 'application_vnd.oasis.opendocument.presentation', 'exec ooimpress "$@"')
+if (~is_chroot):
+	change_text('/home/'+username+'/.config/rox.sourceforge.net/ROX-Filer')
+change_text('/etc/skel/.config/rox.sourceforge.net/ROX-Filer')
+if (is_chroot):
+	change_text('/usr/share/antiX-install/icewm')
