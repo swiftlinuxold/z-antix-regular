@@ -27,6 +27,11 @@ else:
 # 4. application_vnd.oasis.opendocument.spreadsheet: gnumeric -> oocalc
 # 5. application_vnd.oasis.opendocument.text: abiword -> oowriter
 
+# Adding files in ~/.config/rox.sourceforge.net/MIME-types
+# and /etc/skel/.config/rox.sourceforge.net/MIME-types
+# 6. application_vnd.ms-powerpoint: ooimpress
+# 7. application_vnd.oasis.opendocument.presentation: ooimpress
+
 file_mime=''
 def change_text (pathdir, filename, text_old, text_new):
 	if (~is_chroot):
@@ -46,3 +51,17 @@ change_text (path_mime_types, 'application_msword', 'abiword', 'oowriter')
 change_text (path_mime_types, 'application_vnd.ms-excel', 'gnumeric', 'oocalc')
 change_text (path_mime_types, 'application_vnd.oasis.opendocument.spreadsheet', 'gnumeric', 'oocalc')
 change_text (path_mime_types, 'application_vnd.oasis.opendocument.text', 'abiword', 'oowriter')
+
+def add_files(pathdir, filename, text):
+	if (~is_chroot):
+		file_mime='/home/'+username+'/'+pathdir+'/'+filename
+		f = open (file_mime, 'w')
+		f.write('#! /bin/sh\n'+text)
+	
+	file_mime='/etc/skel/'+pathdir+'/'+filename
+	f = open (file_mime, 'w')
+	f.write('#! /bin/sh\n'+text)
+	
+path_mime_types='.config/rox.sourceforge.net/MIME-types'
+add_files(path_mime_types, 'application_vnd.ms-powerpoint', 'exec ooimpress "$@"')
+add_files(path_mime_types, 'application_vnd.oasis.opendocument.presentation', 'exec ooimpress "$@"')
