@@ -15,49 +15,34 @@ else:
 	username=username[6:-12]
 	dir_develop='/home/'+username+'/develop'
 	
-if (~is_chroot):
-	# Go through every file in MIME-types directory that isn't abiword
-	# and replace abiword with oowriter.
-	# Go through every file in MIME-types directory that isn't gnumeric
-	# and replace gnumberic with oocalc.
-	# Go through every file in MIME-types directory that isn't gnumeric
-	# and replace gnumberic with oocalc.
+# Changing MIME types for Regular Swift Linux
 
-	path_mime='home/'+username+'/.config/rox.sourceforge.net/MIME-types/'
-	text=open(path_mime+'application_msword').read()
-	text.replace()
+# 1.  defaults.list in ~/.local/share/applications and 
+# /etc/skel/.local/share/applications: abiword -> oowriter
+
+# Changing files in ~/.config/rox.sourceforge.net/MIME-types
+# and /etc/skel/.config/rox.sourceforge.net/MIME-types
+# 2. application_msword: abiword -> oowriter
+# 3. application_vnd.ms-excel: gnumeric -> oocalc
+# 4. application_vnd.oasis.opendocument.spreadsheet: gnumeric -> oocalc
+# 5. application_vnd.oasis.opendocument.text: abiword -> oowriter
+
+file_mime=''
+def change_text (pathdir, filename, text_old, text_new):
+	if (~is_chroot):
+		file_mime='/home/'+username+'/'+pathdir+'/'+filename
+		text=open(file_mime, 'r').read()
+		text=text.replace(text_old, text_new)
+		open (file_mime, 'w').write(text)
 	
+	file_mime='/etc/skel/'+pathdir+'/'+filename
+	text=open(file_mime, 'r').read()
+	text = text.replace(text_old, text_new) 
+	open(file_mime, "w").write(text)
 	
-	
-	
-	
-	
-if (~is_chroot):
-	# Replace "Diet" with "Regular"
-    text=open('/home/'+username+'/.conkyrc', 'r').read()
-    text = text.replace("Diet", "Regular") 
-    open('/home/'+username+'/.conkyrc', "w").write(text)
-    
-if (~is_chroot):
-	# Replace "Diet" with "Regular"
-    text=open('/etc/skel/.conkyrc', 'r').read()
-    text = text.replace("Diet", "Regular") 
-    open('/etc/skel/.conkyrc', "w").write(text)
-
-rm /home/$USERNAME/.config/rox.sourceforge.net/MIME-types/application_msword 
-	cp $DIR_CONFIG/MIME-types/application_msword /home/$USERNAME/.config/rox.sourceforge.net/MIME-types
-
-	rm /home/$USERNAME/.config/rox.sourceforge.net/MIME-types/application_vnd.ms-excel 
-	cp $DIR_CONFIG/MIME-types/application_vnd.ms-excel /home/$USERNAME/.config/rox.sourceforge.net/MIME-types
-
-	rm /home/$USERNAME/.config/rox.sourceforge.net/MIME-types/application_vnd.oasis.opendocument.spreadsheet 
-	cp $DIR_CONFIG/MIME-types/application_vnd.oasis.opendocument.spreadsheet /home/$USERNAME/.config/rox.sourceforge.net/MIME-types
-
-	rm /home/$USERNAME/.config/rox.sourceforge.net/MIME-types/application_vnd.oasis.opendocument.text 
-	cp $DIR_CONFIG/MIME-types/application_vnd.oasis.opendocument.text /home/$USERNAME/.config/rox.sourceforge.net/MIME-types
-
-	rm /home/$USERNAME/.config/rox.sourceforge.net/MIME-types/application_vnd.ms-powerpoint
-	cp $DIR_CONFIG/MIME-types/application_vnd.ms-powerpoint /home/$USERNAME/.config/rox.sourceforge.net/MIME-types
-
-	rm /home/$USERNAME/.config/rox.sourceforge.net/MIME-types/application_vnd.oasis.opendocument.presentation
-	cp $DIR_CONFIG/MIME-types/application_vnd.oasis.opendocument.presentation /home/$USERNAME/.config/rox.sourceforge.net/MIME-types
+change_text ('.local/share/applications', 'defaults.list', 'abiword', 'oowriter')
+path_mime_types='.config/rox.sourceforge.net/MIME-types'
+change_text (path_mime_types, 'application_msword', 'abiword', 'oowriter')
+change_text (path_mime_types, 'application_vnd.ms-excel', 'gnumeric', 'oocalc')
+change_text (path_mime_types, 'application_vnd.oasis.opendocument.spreadsheet', 'gnumeric', 'oocalc')
+change_text (path_mime_types, 'application_vnd.oasis.opendocument.text', 'abiword', 'oowriter')

@@ -14,16 +14,14 @@ else:
 	username=os.environ['XAUTHORITY']
 	username=username[6:-12]
 	dir_develop='/home/'+username+'/develop'
-	
+
+# Replace "Diet" with "Regular"	in Conky display
 if (~is_chroot):
-	# Replace "Diet" with "Regular"
     text=open('/home/'+username+'/.conkyrc', 'r').read()
     text = text.replace("Diet", "Regular") 
     open('/home/'+username+'/.conkyrc', "w").write(text)
-    
-if (~is_chroot):
-	# Replace "Diet" with "Regular"
-    text=open('/etc/skel/.conkyrc', 'r').read()
-    text = text.replace("Diet", "Regular") 
-    open('/etc/skel/.conkyrc', "w").write(text)
+
+text=open('/etc/skel/.conkyrc', 'r').read()
+text = text.replace("Diet", "Regular") 
+open('/etc/skel/.conkyrc', "w").write(text)
 	
