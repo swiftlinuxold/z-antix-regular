@@ -29,9 +29,11 @@ fi
 python $DIR_DEVELOP/regular/conky.py
 
 # Change MIME-types to OpenOffice formats
-
+python $DIR_DEVELOP/regular/mime.py
 
 # Change ROX
+# Change pb_antiX-ice files to show OpenOffice icons
+python $DIR_DEVELOP/regular/rox.py
 
 # Add OpenOffice
 
