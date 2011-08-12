@@ -34,7 +34,7 @@ def change_text (pathdir):
 	text=text.replace(text_old, text_new)
 	open (file_pb, 'w').write(text)
 
-if (~is_chroot):
+if (not(is_chroot)):
 	change_text('/home/'+username+'/.config/rox.sourceforge.net/ROX-Filer')
 change_text('/etc/skel/.config/rox.sourceforge.net/ROX-Filer')
 if (is_chroot):

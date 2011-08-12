@@ -34,7 +34,7 @@ print 'Changing MIME-types so files open in OpenOffice instead of Abiword or Gnu
 
 file_mime=''
 def change_text (pathdir, filename, text_old, text_new):
-	if (~is_chroot):
+	if (not(is_chroot)):
 		file_mime='/home/'+username+'/'+pathdir+'/'+filename
 		text=open(file_mime, 'r').read()
 		text=text.replace(text_old, text_new)
@@ -53,7 +53,7 @@ change_text (path_mime_types, 'application_vnd.oasis.opendocument.spreadsheet', 
 change_text (path_mime_types, 'application_vnd.oasis.opendocument.text', 'abiword', 'oowriter')
 
 def add_files(pathdir, filename, text):
-	if (~is_chroot):
+	if (not(is_chroot)):
 		file_mime='/home/'+username+'/'+pathdir+'/'+filename
 		f = open (file_mime, 'w')
 		f.write('#! /bin/sh\n'+text)

@@ -8,7 +8,7 @@ is_chroot = os.path.exists('/srv')
 username=''
 dir_develop=''
 
-if (is_chroot):
+if (not(is_chroot)):
 	dir_develop='/usr/local/bin/develop'
 else:
 	username=os.environ['XAUTHORITY']
@@ -16,7 +16,7 @@ else:
 	dir_develop='/home/'+username+'/develop'
 
 print 'Conky display: Diet -> Regular'
-if (~is_chroot):
+if (not(is_chroot)):
     text=open('/home/'+username+'/.conkyrc', 'r').read()
     text = text.replace("Diet", "Regular") 
     open('/home/'+username+'/.conkyrc', "w").write(text)
