@@ -24,7 +24,13 @@ else
 fi
 
 # From Diet Swift Linux to Regular Swift Linux
+echo "*****************************************************************"
 echo "TRANSFORMING DIET SWIFT LINUX INTO REGULAR SWIFT LINUX"
+# Add OpenOffice
+sh $DIR_DEVELOP/openoffice/main.sh
+
+# Add forensic packages
+sh $DIR_DEVELOP/forensic/main.sh
 
 # Change Conky
 python $DIR_DEVELOP/regular/conky.py
@@ -36,10 +42,8 @@ python $DIR_DEVELOP/regular/mime.py
 # Change pb_antiX-ice files to show OpenOffice icons
 python $DIR_DEVELOP/regular/rox.py
 
-# Add OpenOffice
-sh $DIR_DEVELOP/openoffice/main.sh
 
-# Add forensic packages
-sh $DIR_DEVELOP/forensic/main.sh
+echo "FINISHED TRANSFORMING DIET SWIFT LINUX INTO REGULAR SWIFT LINUX"
+echo "*****************************************************************"
 
 exit 0
