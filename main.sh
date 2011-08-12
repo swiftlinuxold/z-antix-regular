@@ -24,6 +24,7 @@ else
 fi
 
 # From Diet Swift Linux to Regular Swift Linux
+echo "TRANSFORMING DIET SWIFT LINUX INTO REGULAR SWIFT LINUX"
 
 # Change Conky
 python $DIR_DEVELOP/regular/conky.py

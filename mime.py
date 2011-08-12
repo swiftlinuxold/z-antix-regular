@@ -15,7 +15,7 @@ else:
 	username=username[6:-12]
 	dir_develop='/home/'+username+'/develop'
 	
-# Changing MIME types for Regular Swift Linux
+print 'Changing MIME-types so files open in OpenOffice instead of Abiword or Gnumeric'
 
 # 1.  defaults.list in ~/.local/share/applications and 
 # /etc/skel/.local/share/applications: abiword -> oowriter

@@ -15,7 +15,7 @@ else:
 	username=username[6:-12]
 	dir_develop='/home/'+username+'/develop'
 
-# Replace "Diet" with "Regular"	in Conky display
+print 'Conky display: Diet -> Regular'
 if (~is_chroot):
     text=open('/home/'+username+'/.conkyrc', 'r').read()
     text = text.replace("Diet", "Regular") 

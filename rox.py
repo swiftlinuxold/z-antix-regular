@@ -20,6 +20,8 @@ else:
 # /etc/skel/.config/rox.sourceforge.net/ROX-Filer/pb_antiX-ice
 # /usr/share/antiX-install/icewm/pb_antiX-ice
 
+print 'Adding OpenOffice icons to the ROX pinboard desktop'
+
 def change_text (pathdir):
 	file_pb=pathdir+'/pb_antiX-ice'
 	text=open(file_pb, 'r').read()
