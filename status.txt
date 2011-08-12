@@ -1,0 +1,19 @@
+TRANSFORMING DIET SWIFT LINUX INTO REGULAR SWIFT LINUX
+Conky display: Diet -> Regular
+Traceback (most recent call last):
+  File "/usr/local/bin/develop/regular/conky.py", line 20, in <module>
+    text=open('/home/'+username+'/.conkyrc', 'r').read()
+IOError: [Errno 2] No such file or directory: '/home//.conkyrc'
+Changing MIME-types so files open in OpenOffice instead of Abiword or Gnumeric
+Traceback (most recent call last):
+  File "/usr/local/bin/develop/regular/mime.py", line 48, in <module>
+    change_text ('.local/share/applications', 'defaults.list', 'abiword', 'oowriter')
+  File "/usr/local/bin/develop/regular/mime.py", line 39, in change_text
+    text=open(file_mime, 'r').read()
+IOError: [Errno 2] No such file or directory: '/home//.local/share/applications/defaults.list'
+Adding OpenOffice icons to the ROX pinboard desktop
+Traceback (most recent call last):
+  File "/usr/local/bin/develop/regular/rox.py", line 38, in <module>
+    change_text('/home/'+username+'/.config/rox.sourceforge.net/ROX-Filer')
+  File "/usr/local/bin/develop/regular/rox.py", line 27, in change_text
+    text=open(file_pb, 'r').read()

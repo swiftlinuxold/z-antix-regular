@@ -4,7 +4,7 @@ import os # allows interaction with the operating system
 import getpass # allows the username to be obtained
 import os.path # allows you to determine if a directory exists
 
-is_chroot = os.path.exists("/srv")
+is_chroot = os.path.exists('/srv')
 username=''
 dir_develop=''
 
