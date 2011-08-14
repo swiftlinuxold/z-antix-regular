@@ -52,10 +52,10 @@ def change_text (pathdir, filename, text_old, text_new):
 	open(file_mime, "w").write(text)
 
 print 'Changing MIME types for Thunar'	
-dl_old='application/msword: abiword.desktop'
-dl_new='application/msword: ooo-writer.desktop\n'
+dl_old='application/msword=abiword.desktop'
+dl_new='application/msword=ooo-writer.desktop\n'
 dl_new=dl_new+'application/vnd.oasis.opendocument.text=ooo-writer.desktop\n'
-dl_new=dl_new+'application/vnd.ms-excel=ooo-calc.desktop'
+dl_new=dl_new+'application/vnd.ms-excel=ooo-calc.desktop\n'
 change_text ('.local/share/applications', 'defaults.list', dl_old, dl_new)
 
 print 'Changing MIME types for ROX-Filer'
