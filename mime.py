@@ -40,7 +40,7 @@ def add_files(pathdir, filename, text):
 	f.write('#! /bin/sh\n'+text)
 
 # CHANGES IN  ~/.local/share/applications/defaults.list and 
-# /etc/skel/.local/share/applications/defaults.list
+# /etc/skel/.local/share/applications/defaults.list:
 #ADD
 #application/vnd.oasis.opendocument.text=ooo-writer.desktop
 #application/vnd.ms-excel=ooo-calc.desktop
@@ -53,18 +53,19 @@ dl_new=dl_new+'application/vnd.oasis.opendocument.text=ooo-writer.desktop\n'
 dl_new=dl_new+'application/vnd.ms-excel=ooo-calc.desktop\n'
 change_text ('.local/share/applications', 'defaults.list', dl_old, dl_new)
 
+print 'Changing MIME types for ROX-Filer'
 # Changing files in ~/.config/rox.sourceforge.net/MIME-types
 # and /etc/skel/.config/rox.sourceforge.net/MIME-types
-# 2. application_msword: abiword -> oowriter
-# 3. application_vnd.ms-excel: gnumeric -> oocalc
-# 4. application_vnd.oasis.opendocument.spreadsheet: gnumeric -> oocalc
-# 5. application_vnd.oasis.opendocument.text: abiword -> oowriter
+# 1. application_msword: abiword -> oowriter
+# 2. application_vnd.ms-excel: gnumeric -> oocalc
+# 3. application_vnd.oasis.opendocument.spreadsheet: gnumeric -> oocalc
+# 4. application_vnd.oasis.opendocument.text: abiword -> oowriter
 
 # Adding files in ~/.config/rox.sourceforge.net/MIME-types
 # and /etc/skel/.config/rox.sourceforge.net/MIME-types
-# 6. application_vnd.ms-powerpoint: ooimpress
-# 7. application_vnd.oasis.opendocument.presentation: ooimpress
-print 'Changing MIME types for ROX-Filer'
+# 5. application_vnd.ms-powerpoint: ooimpress
+# 6. application_vnd.oasis.opendocument.presentation: ooimpress
+
 path_mime_types='.config/rox.sourceforge.net/MIME-types'
 change_text (path_mime_types, 'application_msword', 'abiword', 'oowriter')
 change_text (path_mime_types, 'application_vnd.ms-excel', 'gnumeric', 'oocalc')
