@@ -32,6 +32,13 @@ print 'Changing MIME-types so files open in OpenOffice instead of Abiword or Gnu
 # 6. application_vnd.ms-powerpoint: ooimpress
 # 7. application_vnd.oasis.opendocument.presentation: ooimpress
 
+# CHANGING ~/.local/share/applications, /etc/skel/.local/share/applications
+#ADD
+#application/vnd.oasis.opendocument.text=ooo-writer.desktop
+#application/vnd.ms-excel=ooo-calc.desktop
+#CHANGE:
+#application/msword: abiword.desktop -> ooo-writer.desktop
+
 file_mime=''
 def change_text (pathdir, filename, text_old, text_new):
 	if (not(is_chroot)):
