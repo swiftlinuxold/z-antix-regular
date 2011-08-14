@@ -39,7 +39,6 @@ print 'Changing MIME-types so files open in OpenOffice instead of Abiword or Gnu
 #CHANGE:
 #application/msword: abiword.desktop -> ooo-writer.desktop
 
-file_mime=''
 def change_text (pathdir, filename, text_old, text_new):
 	if (not(is_chroot)):
 		file_mime='/home/'+username+'/'+pathdir+'/'+filename
@@ -51,8 +50,15 @@ def change_text (pathdir, filename, text_old, text_new):
 	text=open(file_mime, 'r').read()
 	text = text.replace(text_old, text_new) 
 	open(file_mime, "w").write(text)
-	
-change_text ('.local/share/applications', 'defaults.list', 'abiword', 'oowriter')
+
+print 'Changing MIME types for Thunar'	
+dl_old='application/msword: abiword.desktop'
+dl_new='application/msword: ooo-writer.desktop\n'
+dl_new=dl_new+'application/vnd.oasis.opendocument.text=ooo-writer.desktop\n'
+dl_new=dl_new+'application/vnd.ms-excel=ooo-calc.desktop'
+change_text ('.local/share/applications', 'defaults.list', dl_old, dl_new)
+
+print 'Changing MIME types for ROX-Filer'
 path_mime_types='.config/rox.sourceforge.net/MIME-types'
 change_text (path_mime_types, 'application_msword', 'abiword', 'oowriter')
 change_text (path_mime_types, 'application_vnd.ms-excel', 'gnumeric', 'oocalc')
