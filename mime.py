@@ -3,17 +3,29 @@
 import os # allows interaction with the operating system
 import getpass # allows the username to be obtained
 import os.path # allows you to determine if a directory exists
+import pwd # allows the pwd.getpwnam command to work
 
 is_chroot = os.path.exists('/srv')
 username=''
 dir_develop=''
 
+p=''
+uid=0
+gid=0
+
 if (is_chroot):
 	dir_develop='/usr/local/bin/develop'
+	p=pwd.getpwnam ('demo')
+	uid=p[2]
+	gid=p[3]
+
 else:
 	username=os.environ['XAUTHORITY']
 	username=username[6:-12]
 	dir_develop='/home/'+username+'/develop'
+	p=pwd.getpwnam (username)
+	uid=p[2]
+	gid=p[3]
 	
 print 'Changing MIME-types so files open in OpenOffice instead of Abiword or Gnumeric'
 
@@ -30,19 +42,19 @@ def change_text (pathdir, filename, text_old, text_new):
 	open(file_mime, "w").write(text)
 	
 def add_files(pathdir, filename, text):
-	p=pwd.getpwnam('jhsu')
-	uid=p[2]
-	gid=p[3]
 	if (not(is_chroot)):
 		file_mime='/home/'+username+'/'+pathdir+'/'+filename
 		f = open (file_mime, 'w')
 		f.write('#! /bin/sh\n'+text)
-		os.fchown(f, uid, gid)
+		os.system ('chown '+username+':users '+ file_mime)
 	
 	file_mime='/etc/skel/'+pathdir+'/'+filename
 	f = open (file_mime, 'w')
 	f.write('#! /bin/sh\n'+text)
-	os.fchown(f, uid, gid)
+	if (not(is_chroot)):
+		os.system ('chown '+username+':users '+ file_mime)
+	else:
+		os.system ('chown demo:users '+ file_mime)
 
 # CHANGES IN  ~/.local/share/applications/defaults.list and 
 # /etc/skel/.local/share/applications/defaults.list:
