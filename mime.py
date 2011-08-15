@@ -47,6 +47,7 @@ def add_files(pathdir, filename, text):
 		f = open (file_mime, 'w')
 		f.write('#! /bin/sh\n'+text)
 		os.system ('chown '+username+':users '+ file_mime)
+		os.system ('chmod a+x '+file_mime)
 	
 	file_mime='/etc/skel/'+pathdir+'/'+filename
 	f = open (file_mime, 'w')
@@ -55,6 +56,7 @@ def add_files(pathdir, filename, text):
 		os.system ('chown '+username+':users '+ file_mime)
 	else:
 		os.system ('chown demo:users '+ file_mime)
+	os.system ('chmod a+x '+file_mime)
 
 # CHANGES IN  ~/.local/share/applications/defaults.list and 
 # /etc/skel/.local/share/applications/defaults.list:
