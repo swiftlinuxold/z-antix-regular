@@ -30,14 +30,19 @@ def change_text (pathdir, filename, text_old, text_new):
 	open(file_mime, "w").write(text)
 	
 def add_files(pathdir, filename, text):
+	p=pwd.getpwnam('jhsu')
+	uid=p[2]
+	gid=p[3]
 	if (not(is_chroot)):
 		file_mime='/home/'+username+'/'+pathdir+'/'+filename
 		f = open (file_mime, 'w')
 		f.write('#! /bin/sh\n'+text)
+		os.fchown(f, uid, gid)
 	
 	file_mime='/etc/skel/'+pathdir+'/'+filename
 	f = open (file_mime, 'w')
 	f.write('#! /bin/sh\n'+text)
+	os.fchown(f, uid, gid)
 
 # CHANGES IN  ~/.local/share/applications/defaults.list and 
 # /etc/skel/.local/share/applications/defaults.list:
