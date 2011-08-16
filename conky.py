@@ -3,16 +3,19 @@
 import os # allows interaction with the operating system
 import getpass # allows the username to be obtained
 import os.path # allows you to determine if a directory exists
+import sys, commands # Allows checking for root
+
+whoami = commands.getoutput( "whoami" )
+if whoami != 'root':
+	sys.exit( 'You must be root to run this script.' )
 
 is_chroot = os.path.exists('/srv')
-username=''
 dir_develop=''
 
-if (not(is_chroot)):
-	dir_develop='/usr/local/bin/develop'
+if (is_chroot):
+	dir_develop='/usr/local/bin/develop'	
 else:
-	username=os.environ['XAUTHORITY']
-	username=username[6:-12]
+	username=commands.getoutput("logname")
 	dir_develop='/home/'+username+'/develop'
 
 print 'Conky display: Diet -> Regular'

@@ -4,6 +4,7 @@ import os # allows interaction with the operating system
 import getpass # allows the username to be obtained
 import os.path # allows you to determine if a directory exists
 import pwd # allows the pwd.getpwnam command to work
+import sys, commands # Allows checking for root
 
 is_chroot = os.path.exists('/srv')
 username=''
@@ -20,8 +21,7 @@ if (is_chroot):
 	gid=p[3]
 
 else:
-	username=os.environ['XAUTHORITY']
-	username=username[6:-12]
+	username=commands.getoutput("logname")
 	dir_develop='/home/'+username+'/develop'
 	p=pwd.getpwnam (username)
 	uid=p[2]
